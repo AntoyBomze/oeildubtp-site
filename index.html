@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OEILDUBTP - Sécurisation de chantiers 24/7</title>
+  <meta name="description" content="OEILDUBTP sécurise vos chantiers avec des caméras 4G autonomes solaires, installation rapide, alertes instantanées et surveillance continue." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B1F3B;
+      --orange: #FF6A00;
+      --white: #ffffff;
+      --light: #f4f7fb;
+      --text: #1a2433;
+      --muted: #60708a;
+      --border: #dde5f0;
+      --success: #0f8a5f;
+      --shadow: 0 10px 30px rgba(11, 31, 59, 0.12);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 22px; border-radius: 999px; font-weight: 700; transition: 0.25s ease;
+      border: 2px solid transparent; cursor: pointer;
+    }
+    .btn-primary { background: var(--orange); color: var(--white); box-shadow: 0 8px 18px rgba(255, 106, 0, 0.25); }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.96; }
+    .btn-secondary { background: transparent; border-color: rgba(255,255,255,0.25); color: var(--white); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+    .btn-dark { background: var(--navy); color: var(--white); }
+    .btn-dark:hover { transform: translateY(-2px); }
+    .tag {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.12); color: var(--white); font-size: 14px; font-weight: 600; margin-bottom: 20px;
+    }
+    header {
+      position: sticky; top: 0; z-index: 1000; background: rgba(11, 31, 59, 0.96);
+      backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 20px; }
+    .brand {
+      display: flex; align-items: center; gap: 12px; color: var(--white);
+      font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 0.5px;
+    }
+    .logo {
+      width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--orange), #ff8f3a);
+      display: grid; place-items: center; color: white; font-size: 20px; box-shadow: 0 8px 20px rgba(255,106,0,0.28);
+    }
+    .nav-links { display: flex; gap: 24px; align-items: center; color: rgba(255,255,255,0.9); font-weight: 600; }
+    .nav-links a:hover { color: var(--white); }
+    .hero {
+      background:
+        linear-gradient(rgba(11,31,59,0.82), rgba(11,31,59,0.88)),
+        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: var(--white); padding: 92px 0 72px;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 36px; align-items: center; }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(2.3rem, 4vw, 4.5rem);
+      line-height: 1.05; margin-bottom: 18px;
+    }
+    .hero p { font-size: 1.1rem; color: rgba(255,255,255,0.88); max-width: 700px; margin-bottom: 28px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+    .hero-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .hero-point {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-sm); padding: 14px 16px; font-weight: 600;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow);
+    }
+    .hero-card h3 { font-family: 'Montserrat', sans-serif; margin-bottom: 14px; font-size: 1.35rem; }
+    .hero-card ul { list-style: none; display: grid; gap: 12px; color: rgba(255,255,255,0.9); }
+    .hero-card li::before { content: '✔'; color: var(--orange); font-weight: 800; margin-right: 10px; }
+    section { padding: 82px 0; }
+    .section-head { max-width: 760px; margin-bottom: 42px; }
+    .eyebrow {
+      color: var(--orange); font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.3px; font-size: 0.85rem; margin-bottom: 10px;
+    }
+    h2 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.1; margin-bottom: 14px; color: var(--navy);
+    }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
+    .problem { background: var(--light); }
+    .cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 26px; box-shadow: var(--shadow);
+    }
+    .card-icon {
+      width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center;
+      background: rgba(255,106,0,0.12); color: var(--orange); font-size: 24px; margin-bottom: 16px;
+    }
+    .card h3 { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin-bottom: 10px; color: var(--navy); }
+    .card p { color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; margin-top: 34px; }
+    .stat {
+      background: var(--white); border: 1px solid var(--border); border-radius: 16px;
+      padding: 20px; text-align: center;
+    }
+    .stat strong {
+      display: block; color: var(--navy); font-family: 'Montserrat', sans-serif;
+      font-size: 1.7rem; margin-bottom: 6px;
+    }
+    .solutions-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; align-items: start; }
+    .checklist { list-style: none; display: grid; gap: 14px; }
+    .checklist li {
+      background: var(--light); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 18px; font-weight: 600; color: var(--navy);
+    }
+    .checklist li::before { content: '✔'; color: var(--orange); margin-right: 10px; font-weight: 800; }
+    .pricing { background: var(--light); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .price-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; box-shadow: var(--shadow); position: relative;
+    }
+    .price-card.featured { border: 2px solid var(--orange); transform: translateY(-8px); }
+    .badge {
+      position: absolute; top: 18px; right: 18px; background: var(--orange); color: white;
+      padding: 8px 12px; border-radius: 999px; font-size: 12px; font-weight: 800;
+    }
+    .price-name { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 8px; }
+    .price-amount { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; color: var(--navy); margin-bottom: 8px; }
+    .price-amount span { font-size: 1rem; color: var(--muted); font-family: 'Inter', sans-serif; }
+    .price-desc { color: var(--muted); margin-bottom: 18px; }
+    .price-list { list-style: none; display: grid; gap: 12px; margin-bottom: 22px; }
+    .price-list li::before { content: '✔'; color: var(--success); margin-right: 10px; font-weight: 800; }
+    .timeline { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 18px; }
+    .step {
+      background: var(--white); border: 1px solid var(--border); border-radius: 18px;
+      padding: 24px 18px; box-shadow: var(--shadow);
+    }
+    .step-number {
+      width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
+      background: var(--navy); color: var(--white); font-weight: 800; margin-bottom: 14px;
+    }
+    .step h3 { font-family: 'Montserrat', sans-serif; color: var(--navy); margin-bottom: 8px; font-size: 1.05rem; }
+    .cta-band {
+      background: linear-gradient(135deg, var(--navy), #15355f); color: var(--white); border-radius: 26px;
+      padding: 38px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 26px;
+    }
+    .cta-band h3 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; margin-bottom: 10px; }
+    .installation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+    .install-box, .contact-box {
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 28px; box-shadow: var(--shadow);
+    }
+    .install-list { list-style: none; display: grid; gap: 12px; margin-top: 14px; }
+    .install-list li {
+      padding: 14px 16px; background: var(--light); border-radius: 14px;
+      border: 1px solid var(--border); font-weight: 600;
+    }
+    .contact { background: var(--light); }
+    form { display: grid; gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    input, textarea {
+      width: 100%; border: 1px solid #cfd9e6; border-radius: 14px; padding: 15px 16px;
+      font: inherit; color: var(--text); background: #fff; outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 4px rgba(255, 106, 0, 0.12); }
+    textarea { min-height: 140px; resize: vertical; }
+    .contact-info { display: grid; gap: 16px; margin-top: 20px; }
+    .info-item { padding: 18px; background: #fff; border-radius: 16px; border: 1px solid var(--border); }
+    .info-item strong { display: block; color: var(--navy); margin-bottom: 4px; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.8); padding: 30px 0; }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .footer-wrap strong { color: var(--white); }
+    @media (max-width: 1024px) {
+      .hero-grid, .solutions-grid, .installation-grid, .cards-3, .pricing-grid, .timeline, .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; padding: 14px 0; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .hero-grid, .cards-3, .solutions-grid, .pricing-grid, .timeline, .installation-grid, .stats, .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 72px; }
+      .cta-band { flex-direction: column; align-items: flex-start; }
+      .price-card.featured { transform: none; }
+      .hero h1 { font-size: 2.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#accueil" class="brand">
+        <div class="logo">◉</div>
+        <span>OEILDUBTP</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#offres">Offres</a>
+        <a href="#fonctionnement">Fonctionnement</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-primary">Demander un devis</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div>
+          <div class="tag">Opérateur de sécurité chantier en France</div>
+          <h1>Sécurisation de chantiers 24/7 en France</h1>
+          <p>Caméras autonomes 4G solaires pour prévenir les vols, intrusions et retards de chantier. Installation rapide, accès mobile en temps réel et alertes immédiates.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Demander un devis</a>
+            <a href="#fonctionnement" class="btn btn-secondary">Installation sous 24h</a>
+          </div>
+          <div class="hero-points">
+            <div class="hero-point">Surveillance 24/7</div>
+            <div class="hero-point">Installation 24-48h</div>
+            <div class="hero-point">Alertes téléphone</div>
+            <div class="hero-point">Accès mobile client</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Pourquoi les entreprises choisissent OEILDUBTP</h3>
+          <ul>
+            <li>Réduction immédiate du risque de vol</li>
+            <li>Preuves vidéo exploitables en cas d'incident</li>
+            <li>Caméras autonomes sans travaux lourds</li>
+            <li>Mise en service rapide sur chantier</li>
+            <li>Solution pensée pour les environnements BTP</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="problem">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Le problème</div>
+          <h2>Un seul incident peut coûter plusieurs milliers d'euros</h2>
+          <p>Les chantiers subissent régulièrement des pertes liées aux vols, aux intrusions et aux retards. Une surveillance continue permet de limiter les risques et de protéger le matériel, les accès et l'avancement du site.</p>
+        </div>
+        <div class="cards-3">
+          <div class="card"><div class="card-icon">🚧</div><h3>Matériel volé</h3><p>Outillage, équipements et consommables disparaissent rapidement sur les sites peu surveillés.</p></div>
+          <div class="card"><div class="card-icon">⏱</div><h3>Retards de chantier</h3><p>Chaque incident peut ralentir les équipes, perturber la logistique et décaler les livraisons.</p></div>
+          <div class="card"><div class="card-icon">💸</div><h3>Coûts imprévus</h3><p>Remplacement du matériel, immobilisation et pertes d'exploitation pèsent directement sur la marge.</p></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>24/7</strong><span>surveillance continue</span></div>
+          <div class="stat"><strong>24-48h</strong><span>mise en place rapide</span></div>
+          <div class="stat"><strong>4G + solaire</strong><span>autonomie sur chantier</span></div>
+          <div class="stat"><strong>&lt; 1 mois</strong><span>rentabilisation possible</span></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">La solution</div>
+          <h2>Une solution simple, mobile et immédiatement opérationnelle</h2>
+          <p>OEILDUBTP déploie des caméras 4G autonomes avec panneau solaire pour sécuriser rapidement les zones sensibles de vos chantiers, sans installation lourde.</p>
+        </div>
+        <div class="solutions-grid">
+          <div class="install-box">
+            <h3 style="font-family: Montserrat, sans-serif; color: #0B1F3B; margin-bottom: 16px;">Ce qui est inclus</h3>
+            <ul class="checklist">
+              <li>Caméras 4G autonomes</li>
+              <li>Installation rapide sur site</li>
+              <li>Vision en temps réel sur mobile</li>
+              <li>Alertes instantanées</li>
+              <li>Preuve vidéo en cas d'incident</li>
+              <li>Maintenance et assistance selon l'offre</li>
+            </ul>
+          </div>
+          <div class="install-box">
+            <h3 style="font-family: Montserrat, sans-serif; color: #0B1F3B; margin-bottom: 16px;">Avantages client</h3>
+            <ul class="checklist">
+              <li>Réduction des vols et intrusions</li>
+              <li>Dissuasion visible dès l'installation</li>
+              <li>Suivi continu du chantier</li>
+              <li>Protection des points d'accès</li>
+              <li>Déploiement sans réseau fixe</li>
+              <li>Solution adaptable aux petits et gros chantiers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cta-band">
+          <div>
+            <h3>Sécuriser mon chantier</h3>
+            <p>Obtenez une proposition rapide selon la taille de votre site et le niveau de couverture souhaité.</p>
+          </div>
+          <a href="#contact" class="btn btn-primary">Recevoir mon devis</a>
+        </div>
+      </div>
+    </section>
+    <section class="pricing" id="offres">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Nos offres</div>
+          <h2>Des packs adaptés à la taille de votre chantier</h2>
+          <p>Choisissez une couverture simple, standard ou renforcée selon vos besoins opérationnels.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card">
+            <div class="price-name">Pack Start</div>
+            <div class="price-amount">799€<span>/mois</span></div>
+            <p class="price-desc">Pour les petits chantiers ou zones sensibles ciblées.</p>
+            <ul class="price-list">
+              <li>2 caméras autonomes 4G</li>
+              <li>Couverture des accès principaux</li>
+              <li>Alertes téléphone</li>
+              <li>Accès mobile</li>
+              <li>Installation rapide</li>
+            </ul>
+            <a href="#contact" class="btn btn-dark">Choisir cette offre</a>
+          </div>
+          <div class="price-card featured">
+            <div class="badge">Meilleure vente</div>
+            <div class="price-name">Pack Standard</div>
+            <div class="price-amount">1300€<span>/mois</span></div>
+            <p class="price-desc">Le meilleur équilibre pour la majorité des chantiers.</p>
+            <ul class="price-list">
+              <li>3 caméras autonomes 4G</li>
+              <li>Surveillance chantier renforcée</li>
+              <li>Vision en temps réel</li>
+              <li>Alertes instantanées</li>
+              <li>Installation et activation</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary">Choisir cette offre</a>
+          </div>
+          <div class="price-card">
+            <div class="price-name">Pack Pro</div>
+            <div class="price-amount">1900€ à 2500€<span>/mois</span></div>
+            <p class="price-desc">Pour les grands sites, zones multiples et besoins avancés.</p>
+            <ul class="price-list">
+              <li>4 à 6 caméras</li>
+              <li>Multi-zones</li>
+              <li>Maintenance incluse</li>
+              <li>Assistance prioritaire</li>
+              <li>Couverture étendue du chantier</li>
+            </ul>
+            <a href="#contact" class="btn btn-dark">Demander une étude</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="fonctionnement">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Fonctionnement</div>
+          <h2>Déploiement simple en 5 étapes</h2>
+          <p>Une mise en place pensée pour aller vite, limiter les interruptions et rendre le système opérationnel immédiatement.</p>
+        </div>
+        <div class="timeline">
+          <div class="step"><div class="step-number">1</div><h3>Analyse du chantier</h3><p>Identification des zones à risque, accès, stockage et points sensibles.</p></div>
+          <div class="step"><div class="step-number">2</div><h3>Installation 24-48h</h3><p>Mise en place rapide des caméras sur les emplacements définis.</p></div>
+          <div class="step"><div class="step-number">3</div><h3>Activation système</h3><p>Connexion, paramétrage, alimentation solaire et vérification du flux vidéo.</p></div>
+          <div class="step"><div class="step-number">4</div><h3>Accès mobile client</h3><p>Le client reçoit son accès pour visualiser le chantier en temps réel.</p></div>
+          <div class="step"><div class="step-number">5</div><h3>Surveillance continue</h3><p>Le site reste protégé avec alertes et suivi selon le pack choisi.</p></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container installation-grid">
+        <div>
+          <div class="section-head">
+            <div class="eyebrow">Installation type</div>
+            <h2>Une intervention terrain rapide et efficace</h2>
+            <p>L'installation standard prend généralement entre 30 et 45 minutes selon l'accessibilité du chantier et le nombre de caméras.</p>
+          </div>
+          <div class="install-box">
+            <ul class="install-list">
+              <li>1. Fixer la caméra à environ 3 mètres</li>
+              <li>2. Orienter la vue vers l'entrée ou la zone à risque</li>
+              <li>3. Connecter le panneau solaire</li>
+              <li>4. Insérer la carte SIM</li>
+              <li>5. Configurer l'application mobile</li>
+              <li>6. Tester le direct vidéo</li>
+              <li>7. Présenter le système au client</li>
+            </ul>
+          </div>
+        </div>
+        <div class="contact-box">
+          <h3 style="font-family: Montserrat, sans-serif; color: #0B1F3B; margin-bottom: 12px;">Rentabilité simple</h3>
+          <p style="color: #60708a; margin-bottom: 18px;">Exemple de logique économique :</p>
+          <ul class="price-list">
+            <li>Coût matériel de départ estimé : 450€ à 500€</li>
+            <li>Exemple d'abonnement client : 799€/mois</li>
+            <li>Rentabilisation potentielle en moins d'un mois</li>
+            <li>Ensuite : revenu récurrent mensuel</li>
+          </ul>
+          <div style="margin-top: 22px; padding: 18px; background: #fff7f1; border: 1px solid #ffd3b3; border-radius: 14px;">
+            <strong style="color:#0B1F3B;">Positionnement clé :</strong>
+            <p style="margin-top:8px; color:#5d6575;">OEILDUBTP n'est pas un simple vendeur de caméras. C'est un opérateur de sécurité chantier, avec une offre orientée service, réactivité et continuité.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <div class="container installation-grid">
+        <div>
+          <div class="section-head">
+            <div class="eyebrow">Contact</div>
+            <h2>Recevez une réponse sous 24h</h2>
+            <p>Décrivez votre besoin, la localisation du chantier et le niveau de couverture souhaité. Nous revenons vers vous rapidement avec une proposition adaptée.</p>
+          </div>
+          <div class="contact-info">
+            <div class="info-item"><strong>Email</strong>bomze.pro@gmail.com</div>
+            <div class="info-item"><strong>Délai d'intervention</strong>Installation possible sous 24 à 48h selon la zone et la disponibilité.</div>
+            <div class="info-item"><strong>Cible</strong>Entreprises du BTP, maîtres d'oeuvre, conducteurs de travaux, promoteurs et gestionnaires de site.</div>
+          </div>
+        </div>
+        <div class="contact-box">
+          <form id="quoteForm">
+            <div class="grid-2">
+              <input type="text" id="entreprise" placeholder="Nom de l'entreprise" required />
+              <input type="text" id="chantier" placeholder="Localisation du chantier" required />
+            </div>
+            <div class="grid-2">
+              <input type="tel" id="telephone" placeholder="Téléphone" required />
+              <input type="email" id="email" placeholder="Email de contact" required />
+            </div>
+            <textarea id="message" placeholder="Décrivez votre besoin : taille du chantier, délai, nombre de zones à surveiller, risques particuliers..." required></textarea>
+            <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container footer-wrap">
+      <div><strong>OEILDUBTP</strong> - Sécurisation de chantiers 24/7</div>
+      <div>Caméras autonomes 4G solaires - France</div>
+    </div>
+  </footer>
+  <script>
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const entreprise = document.getElementById('entreprise').value.trim();
+      const chantier = document.getElementById('chantier').value.trim();
+      const telephone = document.getElementById('telephone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent('Demande de devis - OEILDUBTP - ' + entreprise);
+      const body = encodeURIComponent(
+        'Nouvelle demande de devis :\n\n' +
+        'Entreprise : ' + entreprise + '\n' +
+        'Chantier : ' + chantier + '\n' +
+        'Téléphone : ' + telephone + '\n' +
+        'Email : ' + email + '\n\n' +
+        'Message :\n' + message
+      );
+      window.location.href = `mailto:bomze.pro@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
